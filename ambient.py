@@ -40,3 +40,11 @@ class Ambient:
             url = url + '?' + '&'.join(__o)
         self.r = requests.get(url)
         return list(reversed(self.r.json()))
+
+    def getprop(self):
+        url = 'http://ambidata.io/api/v2/channels/' + str(self.channelId)
+        if hasattr(self, 'readKey'):
+            url = url + '?' + 'readKey=' + self.readKey
+        self.r = requests.get(url)
+        self.prop = self.r.json()
+        return self.prop

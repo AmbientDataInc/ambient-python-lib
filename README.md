@@ -128,6 +128,24 @@ d = am.read(start='YYYY-mm-dd HH:MM:SS', end='YYYY-mm-dd HH:MM:SS')
 
 件数を指定した場合と同じ辞書形式の配列が返されます。
 
+## チャネル情報の取得
+
+データー名やチャネルの位置情報など、Ambientで指定したチャネル情報を取得します。
+
+```python
+prop = am.getprop()
+```
+
+#### 戻り値
+
+チャネル情報が辞書形式で返されます。d1からd8までのデーターに設定した名前は
+
+```python
+prop['d1']['name']
+```
+
+で参照できます。
+
 ## Example
 
 examplesディレクトリーの下に例を置きました。
