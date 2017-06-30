@@ -11,6 +11,7 @@ Ambientにユーザー登録(無料)し、マイコンからデーターを送�
 
 ambient-python-libはAmbientのPythonライブラリーです。
 Ambientにデーターを送信する機能と、Ambientに蓄積されたデーターを読み込む機能があります。
+また、MicroPythonでも動作します。
 
 ## モジュールのインストール
 
@@ -153,3 +154,9 @@ examplesディレクトリーの下に例を置きました。
 ### hdc1000_example
 
 hdc1000というセンサーで5分ごとに温度、湿度を測定し、Ambientに送信してグラフ化する例です。
+
+## MicroPythonでの使い方
+
+「ambient.py」を開発環境にダウンロードし、
+さらにmfpshellなどを使ってマイコンのローカルファイルシステムにコピーしてください。
+これでMicroPythonのインタープリターやプログラムから「import ambient」できるようになります。

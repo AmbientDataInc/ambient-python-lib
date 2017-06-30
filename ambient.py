@@ -1,9 +1,14 @@
-# -*- coding: utf-8 -*-
-
-import requests
-
 class Ambient:
     def __init__(self, channelId, writeKey, *args):
+        try:
+            import urequests
+            self.requests = urequests
+            self.micro = True
+        except ImportError:
+            import requests
+            self.requests = requests
+            self.micro = False
+
         self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId) + '/dataarray'
         self.channelId = channelId
         self.writeKey = writeKey
@@ -17,7 +22,8 @@ class Ambient:
             __d = data
         else:
             __d = [data]
-        r = requests.post(self.url, json = {'writeKey': self.writeKey, 'data': __d})
+        headers = {'Content-Type' : 'application/json'} if self.micro else {}
+        r = self.requests.post(self.url, json = {'writeKey': self.writeKey, 'data': __d}, headers = headers)
         return r
 
     def read(self, **args):
@@ -38,13 +44,13 @@ class Ambient:
                         __o.append('skip=' + str(args['skip']))
         if len(__o) > 0:
             url = url + '?' + '&'.join(__o)
-        self.r = requests.get(url)
+        self.r = self.requests.get(url)
         return list(reversed(self.r.json()))
 
     def getprop(self):
         url = 'http://ambidata.io/api/v2/channels/' + str(self.channelId)
         if hasattr(self, 'readKey'):
             url = url + '?' + 'readKey=' + self.readKey
-        self.r = requests.get(url)
+        self.r = self.requests.get(url)
         self.prop = self.r.json()
         return self.prop
