@@ -150,7 +150,8 @@ prop['d1']['name']
 ## MicroPythonでの使い方
 
 「ambient.py」を開発環境にダウンロードし、
-さらにmfpshellなどを使ってマイコンのローカルファイルシステムにコピーしてください。
+さらにmpfshellなどのツールを使ってマイコンのローカルファイルシステムにコピーしてください。
+mpfshellについては「[ESP-WROOM-02でMicroPython (Mac) shellの導入](http://qiita.com/taka-murakami/items/25bec288d4aa1bc6f63f)」をご覧ください。
 これでMicroPythonのインタープリターやプログラムから「import ambient」できるようになります。
 
 ## Example
