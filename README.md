@@ -154,16 +154,16 @@ prop['d1']['name']
 mpfshellについては「[ESP-WROOM-02でMicroPython (Mac) shellの導入](http://qiita.com/taka-murakami/items/25bec288d4aa1bc6f63f)」をご覧ください。
 これでMicroPythonのインタープリターやプログラムから「import ambient」できるようになります。
 
-## Example
+## 事例
 
 examplesディレクトリーの下に例を置きました。
 
-### hdc1000_example
+### hdc1000
 
-hdc1000というセンサーで5分ごとに温度、湿度を測定し、Ambientに送信してグラフ化する例です。
+Raspberry PiのPythonでhdc1000というセンサーで5分ごとに温度、湿度を測定し、Ambientに送信してグラフ化する例です。
+詳しくは「[Raspberry Pi3で温度湿度を測定し、Ambientで可視化する](https://ambidata.io/examples/python/)」をご覧ください。
 
-### uvibration
+### uenv
 
-MicroPythonで3軸加速度センサーADXL345を制御し、振動を測定し、Ambientで記録する例です。
-1秒間隔で3000回、5分間、x、y、z軸の加速度を測定し、振動加速度レベルに変換し、
-最大値と上位10%の値を求めてAmbientに送信し、グラフ化します。
+ESP8266のMicroPythonで温度、湿度、照度、振動を測定し、Ambientで記録する例です。
+詳しくは「[MicroPython (ESP8266)で温度、湿度、照度、振動を測定し、Ambientで記録、可視化する](https://ambidata.io/examples/vibration-2/)」をご覧ください。
