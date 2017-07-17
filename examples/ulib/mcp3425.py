@@ -18,19 +18,14 @@ class  Mcp3425:
                 break
         return r[0] * 62.5 # μV
 
-ad = Mcp3425()
-p5 = Pin(5, Pin.OUT)
-p5.value(0)
-
-while True:
-    p5.value(1)
-    utime.sleep_ms(10)
-    print(ad.readAdc())
-    p5.value(0)
-    utime.sleep_ms(990)
-
 if __name__ == '__main__':
     ad = Mcp3425()
+    p5 = Pin(5, Pin.OUT)
+    p5.value(0)
+
     while True:
+        p5.value(1)
+        utime.sleep_ms(10)
         print(ad.readAdc())
-        utime.sleep(1)
+        p5.value(0)
+        utime.sleep_ms(990)
