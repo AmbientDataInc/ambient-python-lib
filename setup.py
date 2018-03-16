@@ -9,7 +9,7 @@ setup(
         description      = 'Python module to send data to Ambient',
         license          = 'MIT',
         author           = 'Takehiko Shimojima',
-        url              = 'https://github.com/TakehikoShimojima/ambient-python-lib.git',
+        url              = 'https://github.com/AmbientDataInc/ambient-python-lib.git',
         keywords         = 'pip github python ambient',
         py_modules       = ['ambient'],
         install_requires = ['requests']

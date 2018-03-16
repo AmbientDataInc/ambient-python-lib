@@ -1,7 +1,7 @@
-# ambient-python-lib AmbientのPythonモジュール
+# AmbientのPython/MicroPythonモジュール
 
 ## Ambient
-[Ambient](https://ambidata.io)はIoTクラウドサービスで、センサーデーターを受信し、蓄積し、可視化(グラフ化)します。
+[Ambient](https://ambidata.io)はIoTデーター可視化サービスで、センサーデーターを受信し、蓄積し、可視化(グラフ化)します。
 
 ![Ambient structure](https://ambidata.io/wp/wp-content/uploads/2016/09/AmbientStructure.jpg)
 
@@ -9,14 +9,14 @@ Ambientにユーザー登録(無料)し、マイコンからデーターを送�
 
 ![Ambient chart](https://ambidata.io/wp/wp-content/uploads/2016/09/fig3-1024x651.jpg)
 
-ambient-python-libはAmbientのPythonライブラリーです。
+ambient-python-libはAmbientのPython/MicroPythonライブラリーです。
 Ambientにデーターを送信する機能と、Ambientに蓄積されたデーターを読み込む機能があります。
-また、MicroPythonでも動作します。
+MicroPythonでも動作します。
 
 ## モジュールのインストール
 
 ```sh
-$ sudo pip install git+https://github.com/TakehikoShimojima/ambient-python-lib.git
+$ sudo pip install git+https://github.com/AmbientDataInc/ambient-python-lib.git
 ```
 
 ## モジュールのimport
@@ -166,4 +166,4 @@ Raspberry PiのPythonでhdc1000というセンサーで5分ごとに温度、湿
 ### uenv
 
 ESP8266のMicroPythonで温度、湿度、照度、振動を測定し、Ambientで記録する例です。
-詳しくは「[MicroPython (ESP8266)で温度、湿度、照度、振動を測定し、Ambientで記録、可視化する](https://ambidata.io/examples/vibration-2/)」をご覧ください。
+詳しくは「[MicroPython (ESP8266)で温度、湿度、照度、振動を測定し、Ambientで記録、可視化する](https://ambidata.io/samples/vibration/vibration-2/)」をご覧ください。
