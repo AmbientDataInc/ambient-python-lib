@@ -167,3 +167,13 @@ Raspberry PiのPythonでhdc1000というセンサーで5分ごとに温度、湿
 
 ESP8266のMicroPythonで温度、湿度、照度、振動を測定し、Ambientで記録する例です。
 詳しくは「[MicroPython (ESP8266)で温度、湿度、照度、振動を測定し、Ambientで記録、可視化する](https://ambidata.io/samples/vibration/vibration-2/)」をご覧ください。
+
+### M5_BME280
+
+M5Stackに温湿度・気圧センサーBME280をつなぎ、温度、湿度、気圧を測定して、Ambientに送信する例です。
+詳しくは「[M5Stack(Micropython編)](https://ambidata.io/samples/m5stack/m5stack-micropython/)」をご覧ください。
+
+### M5_BME680
+
+M5Stackに温湿度・気圧・空気品質センサーBME680をつなぎ、温度、湿度、気圧を測定して、Ambientに送信する例です。
+詳しくは「[M5Stack(Micropython編)](https://ambidata.io/samples/m5stack/m5stack-micropython/)」をご覧ください。
