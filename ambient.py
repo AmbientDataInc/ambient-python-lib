@@ -17,13 +17,13 @@ class Ambient:
         if len(args) >= 1:
             self.readKey = args[0]
 
-    def send(self, data):
+    def send(self, data, timeout = 5.0):
         if isinstance(data, list):
             __d = data
         else:
             __d = [data]
         headers = {'Content-Type' : 'application/json'} if self.micro else {}
-        r = self.requests.post(self.url, json = {'writeKey': self.writeKey, 'data': __d}, headers = headers)
+        r = self.requests.post(self.url, json = {'writeKey': self.writeKey, 'data': __d}, headers = headers, timeout = timeout)
         return r
 
     def read(self, **args):
