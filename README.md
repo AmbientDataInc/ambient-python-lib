@@ -53,7 +53,7 @@ data = [
 r = am.send(data)
 ```
 
-timeout にはサーバー接続のタイムアウト値を指定します。省略時は3.0秒です。
+timeout にはサーバー接続のタイムアウト値を指定します。省略時は5.0秒です。
 
 #### 戻り値
 
@@ -79,13 +79,14 @@ am = ambient.Ambient(チャネルId, ライトキー[, リードキー[, ユー�
 ### 件数を指定してデーターを読み込む
 
 ```python
-d = am.read(n=件数[, skip=スキップ件数])
+d = am.read(n=件数[, skip=スキップ件数[, timeout = timeout]])
 ```
 
 #### パラメーター
 
 * n: 読み込むデーター件数を指定します。最新のn件のデーターが読み込まれます。
 * skip: スキップ件数。最新からスキップ件のデーターを読み飛ばし、その先n件のデーターが読み込まれます。
+* timeout: サーバー接続のタイムアウト値（秒）。省略時は5.0秒。
 
 #### 戻り値
 
@@ -104,12 +105,13 @@ d = am.read(n=件数[, skip=スキップ件数])
 ### 日付を指定してデーターを読み込む
 
 ```python
-d = am.read(date='YYYY-mm-dd')
+d = am.read(date='YYYY-mm-dd'[, timeout = timeout])
 ```
 
 #### パラメーター
 
 * date='YYYY-mm-dd': 指定した日付のデーターを読み込みます。
+* timeout: サーバー接続のタイムアウト値（秒）。省略時は5.0秒。
 
 #### 戻り値
 
@@ -118,7 +120,7 @@ d = am.read(date='YYYY-mm-dd')
 ### 期間を指定してデーターを読み込む
 
 ```python
-d = am.read(start='YYYY-mm-dd HH:MM:SS', end='YYYY-mm-dd HH:MM:SS')
+d = am.read(start='YYYY-mm-dd HH:MM:SS', end='YYYY-mm-dd HH:MM:SS'[, timeout = timeout])
 ```
 
 #### パラメーター
@@ -126,6 +128,7 @@ d = am.read(start='YYYY-mm-dd HH:MM:SS', end='YYYY-mm-dd HH:MM:SS')
 * start='YYYY-mm-dd HH:MM:SS':
 * end='YYYY-mm-dd HH:MM:SS':
 　startからendまでの期間のデーターを読み込みます。
+* timeout: サーバー接続のタイムアウト値（秒）。省略時は5.0秒。
 
 #### 戻り値
 
@@ -136,8 +139,12 @@ d = am.read(start='YYYY-mm-dd HH:MM:SS', end='YYYY-mm-dd HH:MM:SS')
 データー名やチャネルの位置情報など、Ambientで指定したチャネル情報を取得します。
 
 ```python
-prop = am.getprop()
+prop = am.getprop([, timeout = timeout])
 ```
+
+#### パラメーター
+
+* timeout: サーバー接続のタイムアウト値（秒）。省略時は5.0秒。
 
 #### 戻り値
 
