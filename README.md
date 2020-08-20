@@ -30,7 +30,7 @@ import ambient
 
 ```python
 am = ambient.Ambient(チャネルId, ライトキー[, リードキー[, ユーザーキー]])
-r = am.send({'d1': 数値, 'd2': 数値})
+r = am.send({'d1': 数値, 'd2': 数値}[, timeout = timeout])
 ```
 
 #### パラメーター
@@ -52,6 +52,8 @@ data = [
 ]
 r = am.send(data)
 ```
+
+timeout にはサーバー接続のタイムアウト値を指定します。省略時は3.0秒です。
 
 #### 戻り値
 

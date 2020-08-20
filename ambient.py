@@ -17,13 +17,13 @@ class Ambient:
         if len(args) >= 1:
             self.readKey = args[0]
 
-    def send(self, data):
+    def send(self, data, timeout = 3.0):
         if isinstance(data, list):
             __d = data
         else:
             __d = [data]
         headers = {'Content-Type' : 'application/json'} if self.micro else {}
-        r = self.requests.post(self.url, json = {'writeKey': self.writeKey, 'data': __d}, headers = headers)
+        r = self.requests.post(self.url, json = {'writeKey': self.writeKey, 'data': __d}, headers = headers, timeout = timeout)
         return r
 
     def read(self, **args):
@@ -44,13 +44,19 @@ class Ambient:
                         __o.append('skip=' + str(args['skip']))
         if len(__o) > 0:
             url = url + '?' + '&'.join(__o)
-        self.r = self.requests.get(url)
+        timeout = 3.0
+        if 'timeout' in args:
+            timeout = args['timeout']
+        self.r = self.requests.get(url, timeout = timeout)
         return list(reversed(self.r.json()))
 
-    def getprop(self):
+    def getprop(self, **args):
         url = 'http://ambidata.io/api/v2/channels/' + str(self.channelId)
         if hasattr(self, 'readKey'):
             url = url + '?' + 'readKey=' + self.readKey
-        self.r = self.requests.get(url)
+        timeout = 3.0
+        if 'timeout' in args:
+            timeout = args['timeout']
+        self.r = self.requests.get(url, timeout = timeout)
         self.prop = self.r.json()
         return self.prop
