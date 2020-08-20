@@ -17,7 +17,7 @@ class Ambient:
         if len(args) >= 1:
             self.readKey = args[0]
 
-    def send(self, data, timeout = 3.0):
+    def send(self, data, timeout = 5.0):
         if isinstance(data, list):
             __d = data
         else:
@@ -44,7 +44,7 @@ class Ambient:
                         __o.append('skip=' + str(args['skip']))
         if len(__o) > 0:
             url = url + '?' + '&'.join(__o)
-        timeout = 3.0
+        timeout = 5.0
         if 'timeout' in args:
             timeout = args['timeout']
         self.r = self.requests.get(url, timeout = timeout)
@@ -54,7 +54,7 @@ class Ambient:
         url = 'http://ambidata.io/api/v2/channels/' + str(self.channelId)
         if hasattr(self, 'readKey'):
             url = url + '?' + 'readKey=' + self.readKey
-        timeout = 3.0
+        timeout = 5.0
         if 'timeout' in args:
             timeout = args['timeout']
         self.r = self.requests.get(url, timeout = timeout)
