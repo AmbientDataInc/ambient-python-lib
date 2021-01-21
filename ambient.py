@@ -9,13 +9,18 @@ class Ambient:
             self.requests = requests
             self.micro = False
 
-        self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId) + '/dataarray'
         self.channelId = channelId
         self.writeKey = writeKey
+        if len(args) >= 3:
+            self.debug = args[2]
         if len(args) >= 2:
             self.userKey = args[1]
         if len(args) >= 1:
             self.readKey = args[0]
+        if self.debug:
+            self.url = 'http://192.168.33.10/api/v2/channels/' + str(channelId)
+        else:
+            self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId)
 
     def send(self, data, timeout = 5.0):
         if isinstance(data, list):
@@ -23,11 +28,11 @@ class Ambient:
         else:
             __d = [data]
         headers = {'Content-Type' : 'application/json'} if self.micro else {}
-        r = self.requests.post(self.url, json = {'writeKey': self.writeKey, 'data': __d}, headers = headers, timeout = timeout)
+        r = self.requests.post(self.url + '/dataarray', json = {'writeKey': self.writeKey, 'data': __d}, headers = headers, timeout = timeout)
         return r
 
     def read(self, **args):
-        url = 'http://ambidata.io/api/v2/channels/' + str(self.channelId) + '/data'
+        url = self.url + '/data'
         __o = []
         if hasattr(self, 'readKey'):
             __o.append('readKey=' + self.readKey)
@@ -51,7 +56,7 @@ class Ambient:
         return list(reversed(self.r.json()))
 
     def getprop(self, **args):
-        url = 'http://ambidata.io/api/v2/channels/' + str(self.channelId)
+        url = self.url
         if hasattr(self, 'readKey'):
             url = url + '?' + 'readKey=' + self.readKey
         timeout = 5.0
@@ -60,3 +65,8 @@ class Ambient:
         self.r = self.requests.get(url, timeout = timeout)
         self.prop = self.r.json()
         return self.prop
+
+    def putcmnt(self, t, cmnt, timeout = 5.0):
+        headers = {'Content-Type' : 'application/json'} if self.micro else {}
+        r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'cmnt': cmnt}, headers = headers, timeout = timeout)
+        return r
