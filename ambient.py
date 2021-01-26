@@ -11,6 +11,7 @@ class Ambient:
 
         self.channelId = channelId
         self.writeKey = writeKey
+        self.debug = False
         if len(args) >= 3:
             self.debug = args[2]
         if len(args) >= 2:
