@@ -23,7 +23,7 @@ class Ambient:
         else:
             self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId)
 
-    def send(self, data, timeout = 5.0):
+    def send(self, data, timeout = 30.0):
         if isinstance(data, list):
             __d = data
         else:
@@ -50,7 +50,7 @@ class Ambient:
                         __o.append('skip=' + str(args['skip']))
         if len(__o) > 0:
             url = url + '?' + '&'.join(__o)
-        timeout = 5.0
+        timeout = 30.0
         if 'timeout' in args:
             timeout = args['timeout']
         self.r = self.requests.get(url, timeout = timeout)
@@ -60,14 +60,14 @@ class Ambient:
         url = self.url
         if hasattr(self, 'readKey'):
             url = url + '?' + 'readKey=' + self.readKey
-        timeout = 5.0
+        timeout = 30.0
         if 'timeout' in args:
             timeout = args['timeout']
         self.r = self.requests.get(url, timeout = timeout)
         self.prop = self.r.json()
         return self.prop
 
-    def putcmnt(self, t, cmnt, timeout = 5.0):
+    def putcmnt(self, t, cmnt, timeout = 30.0):
         headers = {'Content-Type' : 'application/json'} if self.micro else {}
         r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'cmnt': cmnt}, headers = headers, timeout = timeout)
         return r
