@@ -28,8 +28,10 @@ class Ambient:
             __d = data
         else:
             __d = [data]
-        headers = {'Content-Type' : 'application/json'} if self.micro else {}
-        r = self.requests.post(self.url + '/dataarray', json = {'writeKey': self.writeKey, 'data': __d}, headers = headers, timeout = timeout)
+        if self.micro:
+            r = self.requests.post(self.url + '/dataarray', json = {'writeKey': self.writeKey, 'data': __d}, headers = {'Content-Type' : 'application/json'})
+        else:
+            r = self.requests.post(self.url + '/dataarray', json = {'writeKey': self.writeKey, 'data': __d}, headers = {}, timeout = timeout)
         return r
 
     def read(self, **args):
@@ -53,7 +55,10 @@ class Ambient:
         timeout = 30.0
         if 'timeout' in args:
             timeout = args['timeout']
-        self.r = self.requests.get(url, timeout = timeout)
+        if self.micro:
+            self.r = self.requests.get(url)
+        else:
+            self.r = self.requests.get(url, timeout = timeout)
         return list(reversed(self.r.json()))
 
     def getprop(self, **args):
@@ -63,11 +68,16 @@ class Ambient:
         timeout = 30.0
         if 'timeout' in args:
             timeout = args['timeout']
-        self.r = self.requests.get(url, timeout = timeout)
+        if self.micro:
+            self.r = self.requests.get(url)
+        else:
+            self.r = self.requests.get(url, timeout = timeout)
         self.prop = self.r.json()
         return self.prop
 
     def putcmnt(self, t, cmnt, timeout = 30.0):
-        headers = {'Content-Type' : 'application/json'} if self.micro else {}
-        r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'cmnt': cmnt}, headers = headers, timeout = timeout)
+        if self.micro:
+            r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'cmnt': cmnt}, headers = {'Content-Type' : 'application/json'})
+        else:
+            r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'cmnt': cmnt}, headers = {}, timeout = timeout)
         return r
