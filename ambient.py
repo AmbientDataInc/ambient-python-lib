@@ -19,7 +19,7 @@ class Ambient:
         if len(args) >= 1:
             self.readKey = args[0]
         if self.debug:
-            self.url = 'http://192.168.33.10/api/v2/channels/' + str(channelId)
+            self.url = 'http://192.168.33.13/api/v2/channels/' + str(channelId)
         else:
             self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId)
 
@@ -80,4 +80,11 @@ class Ambient:
             r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'cmnt': cmnt}, headers = {'Content-Type' : 'application/json'})
         else:
             r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'cmnt': cmnt}, headers = {}, timeout = timeout)
+        return r
+
+    def sethide(self, t, hide, timeout = 30.0):
+        if self.micro:
+            r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'hide': hide}, headers = {'Content-Type' : 'application/json'})
+        else:
+            r = self.requests.put(self.url + '/data', json = {'writeKey': self.writeKey, 'created': t, 'hide': hide}, headers = {}, timeout = timeout)
         return r
