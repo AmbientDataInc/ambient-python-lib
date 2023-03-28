@@ -8,6 +8,8 @@ class Ambient:
             import requests
             self.requests = requests
             self.micro = False
+        import time
+        self.time = time
 
         self.channelId = channelId
         self.writeKey = writeKey
@@ -22,8 +24,17 @@ class Ambient:
             self.url = 'http://192.168.33.13/api/v2/channels/' + str(channelId)
         else:
             self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId)
+        self.lastsend = 0
 
     def send(self, data, timeout = 30.0):
+        millis = self.time.time() * 1000.0 if not self.micro else self.time.ticks_ms()
+        if self.lastsend != 0 and (millis - self.lastsend ) < 4999:
+            if self.micro:
+                r = self.requests.Response(None)
+            else:
+                r = self.requests.Response()
+            r.status_code = 403
+            return r
         if isinstance(data, list):
             __d = data
         else:
@@ -32,6 +43,8 @@ class Ambient:
             r = self.requests.post(self.url + '/dataarray', json = {'writeKey': self.writeKey, 'data': __d}, headers = {'Content-Type' : 'application/json'})
         else:
             r = self.requests.post(self.url + '/dataarray', json = {'writeKey': self.writeKey, 'data': __d}, headers = {}, timeout = timeout)
+        millis = self.time.time() * 1000.0 if not self.micro else self.time.ticks_ms()
+        self.lastsend = millis
         return r
 
     def read(self, **args):
