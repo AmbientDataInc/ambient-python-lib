@@ -1,5 +1,5 @@
 class Ambient:
-    def __init__(self, channelId, writeKey, *args):
+    def __init__(self, channelId, writeKey, readKey=None, userKey=None, ssl=False, debug=False):
         try:
             import urequests
             self.requests = urequests
@@ -13,17 +13,19 @@ class Ambient:
 
         self.channelId = channelId
         self.writeKey = writeKey
-        self.debug = False
-        if len(args) >= 3:
-            self.debug = args[2]
-        if len(args) >= 2:
-            self.userKey = args[1]
-        if len(args) >= 1:
-            self.readKey = args[0]
+        self.readKey = readKey
+        self.userKey = userKey
+        self.ssl = ssl
+        self.debug = debug
+
         if self.debug:
             self.url = 'http://192.168.33.13/api/v2/channels/' + str(channelId)
         else:
-            self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId)
+            if self.ssl and not self.micro:
+                self.url = 'https://ambidata.io/api/v2/channels/' + str(channelId)
+            else:
+                self.url = 'http://ambidata.io/api/v2/channels/' + str(channelId)
+
         self.lastsend = 0
 
     def send(self, data, timeout = 30.0):
